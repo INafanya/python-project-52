@@ -13,6 +13,8 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 import os
 from pathlib import Path
 
+import dj_database_url
+import rollbar
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -25,12 +27,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.getenv("SECRET_KEY")
+SECRET_KEY = os.getenv('SECRET_KEY', 'cg#p$g+j9tax!#t2_+&k3q+pmusj6yjpkag')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["127.0.0.1", "localhost"]
+# ALLOWED_HOSTS = ["127.0.0.1", "localhost"]
+ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '127.0.0.1').split()
 
 
 # Application definition
@@ -62,6 +65,19 @@ MIDDLEWARE = [
     'task_manager.rollbar_middleware.CustomRollbarNotifierMiddleware',
 ]
 
+ROLLBAR = {
+    'access_token': os.getenv('ROLLBAR_ACCESS_TOKEN'),
+    'environment': os.getenv('ROLLBAR_ENV', 'development'),
+    'code_version': '1.0',
+    'root': BASE_DIR,
+}
+
+rollbar.init(**ROLLBAR)
+
+LOGIN_URL = 'login'
+LOGIN_REDIRECT_URL = "/"
+LOGOUT_REDIRECT_URL = "/"
+
 ROOT_URLCONF = 'task_manager.urls'
 
 TEMPLATES = [
@@ -85,11 +101,15 @@ WSGI_APPLICATION = 'task_manager.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    'default': dj_database_url.config(default=f"sqlite:///{BASE_DIR / 'db.sqlite3'}")
 }
 
 
