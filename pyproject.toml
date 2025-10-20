@@ -25,5 +25,6 @@ packages = ["brain_games"]
 [dependency-groups]
 dev = [
     "pytest>=8.4.2",
+    "pytest-django>=4.11.1",
     "ruff>=0.14.1",
 ]
