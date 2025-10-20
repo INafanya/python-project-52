@@ -19,14 +19,32 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Task',
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.BigAutoField(auto_created=True, primary_key=True,
+                                           serialize=False, verbose_name='ID')),
                 ('name', models.CharField(max_length=100, verbose_name='Имя')),
-                ('description', models.TextField(blank=True, verbose_name='Описание')),
-                ('created_at', models.DateTimeField(auto_now_add=True, verbose_name='Creation date')),
-                ('author', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, related_name='authored_tasks', to=settings.AUTH_USER_MODEL, verbose_name='Author')),
-                ('executor', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.PROTECT, related_name='executed_tasks', to=settings.AUTH_USER_MODEL, verbose_name='Executor')),
-                ('labels', models.ManyToManyField(blank=True, related_name='tasks', to='labels.label', verbose_name='Labels')),
-                ('status', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, related_name='tasks', to='statuses.status', verbose_name='Status')),
+                ('description', models.TextField(
+                    blank=True, verbose_name='Описание')),
+                ('created_at', models.DateTimeField(
+                    auto_now_add=True, verbose_name='Creation date')),
+                ('author', models.ForeignKey(
+                    on_delete=django.db.models.deletion.PROTECT,
+                    related_name='authored_tasks',
+                    to=settings.AUTH_USER_MODEL,
+                    verbose_name='Author')),
+                ('executor', models.ForeignKey(blank=True, null=True,
+                                               on_delete=django.db.models.deletion.PROTECT,
+                                               related_name='executed_tasks',
+                                               to=settings.AUTH_USER_MODEL,
+                                               verbose_name='Executor')),
+                ('labels', models.ManyToManyField(
+                    blank=True, related_name='tasks',
+                    to='labels.label',
+                    verbose_name='Labels')),
+                ('status', models.ForeignKey(
+                    on_delete=django.db.models.deletion.PROTECT,
+                    related_name='tasks',
+                    to='statuses.status',
+                    verbose_name='Status')),
             ],
             options={
                 'verbose_name': 'Task',
