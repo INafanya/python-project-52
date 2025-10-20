@@ -1,6 +1,10 @@
 build:
 	./build.sh
 
+render-build:
+	./build.sh
+	uv run python manage.py migrate
+
 install:
 	uv sync
 
