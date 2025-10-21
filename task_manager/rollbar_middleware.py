@@ -15,7 +15,6 @@ class CustomRollbarNotifierMiddleware(RollbarNotifierMiddleware):
                 "person": {
                     "id": request.user.id,
                     "username": request.user.username,
-                    "email": request.user.email,
                 }
             }
         return {}

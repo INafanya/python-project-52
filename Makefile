@@ -1,15 +1,8 @@
 build:
 	./build.sh
 
-render-build:
-	./build.sh
-	uv run python manage.py migrate
-
 install:
 	uv sync
-
-collectstatic:
-	uv run python manage.py collectstatic --noinput
 
 migrate:
 	uv run python manage.py migrate
@@ -25,3 +18,9 @@ lint:
 
 test:
 	uv run pytest --reuse-db
+
+compilemessages:
+	uv run django-admin compilemessages
+
+makemessages:
+	uv run sh -c 'django-admin makemessages -l ru

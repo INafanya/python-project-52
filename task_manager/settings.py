@@ -30,7 +30,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.getenv('SECRET_KEY', 'cg#p$g+j9tax!#t2_+&k3q+pmusj6yjpkag')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# DEBUG = True
+DEBUG = bool(os.getenv('DJANGO_DEBUG', True))
 
 # ALLOWED_HOSTS = ["127.0.0.1", "localhost"]
 ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', 'webserver').split()
@@ -112,6 +113,10 @@ DATABASES = {
     'default': dj_database_url.config(
         default=f"sqlite:///{BASE_DIR / 'db.sqlite3'}")
 }
+print(f'DB: {DATABASES}')
+
+# db_from_env = dj_database_url.config(conn_max_age=500)
+# DATABASES['default'].update(db_from_env)
 
 
 # Password validation
@@ -146,6 +151,8 @@ LANGUAGES = [
     ("ru", "Русский"),
     ("en", "English"),
 ]
+
+LOCALE_PATHS = [BASE_DIR / 'task_manager' / 'locale',]
 
 TIME_ZONE = 'UTC'
 

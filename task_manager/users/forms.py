@@ -26,7 +26,6 @@ class UserCreateForm(UserCreationForm):
             'first_name',
             'last_name',
             'username',
-            'email',
             'password1',
             'password2'
         ]
@@ -34,13 +33,11 @@ class UserCreateForm(UserCreationForm):
             'first_name': _('First name'),
             'last_name': _('Last name'),
             'username': _('Username'),
-            'email': _('email'),
         }
         widgets = {
             'first_name': forms.TextInput(attrs={'required': True}),
             'last_name': forms.TextInput(attrs={'required': True}),
             'username': forms.TextInput(attrs={'required': True}),
-            'email': forms.TextInput(attrs={'required': True}),
         }
 
     def clean(self):
