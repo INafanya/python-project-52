@@ -33,9 +33,7 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 # DEBUG = True
 DEBUG = bool(os.getenv('DJANGO_DEBUG', False))
 
-# ALLOWED_HOSTS = ["127.0.0.1", "localhost"]
 ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', 'webserver').split()
-
 
 # Application definition
 
@@ -106,9 +104,6 @@ DATABASES = {
     'default': dj_database_url.config(
         default=f"sqlite:///{BASE_DIR / 'db.sqlite3'}")
 }
-
-# db_from_env = dj_database_url.config(conn_max_age=500)
-# DATABASES['default'].update(db_from_env)
 
 
 # Password validation

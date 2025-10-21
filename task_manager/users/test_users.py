@@ -46,8 +46,8 @@ class TestUsers:
 
     # Test Update User
     def test_user_update(self, client):
-        User = get_user_model()
-        user = User.objects.create_user(username="u1", password="pass123")
+        user_model = get_user_model()
+        user = user_model.objects.create_user(username="u1", password="pass123")
         client.login(username="u1", password="pass123")
 
         url = reverse("users_update", kwargs={"pk": user.id})
@@ -67,19 +67,19 @@ class TestUsers:
 
     # Test Delete User
     def test_user_delete(self, client):
-        User = get_user_model()
-        user = User.objects.create_user(username="u1", password="pass123")
+        user_model = get_user_model()
+        user = user_model.objects.create_user(username="u1", password="pass123")
         client.login(username="u1", password="pass123")
 
         url = reverse("users_delete", kwargs={"pk": user.id})
         response = client.post(url)
         assert response.status_code == 302
-        assert not User.objects.filter(id=user.id).exists()
+        assert not user_model.objects.filter(id=user.id).exists()
 
     # Test LogIn
     def test_login_logout(self, client):
-        User = get_user_model()
-        User.objects.create_user(username="u1", password="pass123")
+        user_model = get_user_model()
+        user_model.objects.create_user(username="u1", password="pass123")
 
         login_url = reverse("login")
         response = client.post(
