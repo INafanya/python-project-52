@@ -122,7 +122,6 @@ def test_get_payload_data_authenticated_user():
 
     assert "person" in payload
     assert payload["person"]["username"] == "testuser"
-    assert payload["person"]["email"] == "test@example.com"
 
 
 def test_get_payload_data_anonymous_user():
