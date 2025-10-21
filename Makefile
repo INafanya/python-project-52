@@ -35,7 +35,7 @@ makemessages:
 	uv run sh -c 'django-admin makemessages -l ru
 
 coverage:
-	uv run coverage run --omit='*/migrations/*,*/settings.py,*/venv/*,*/.venv/*' -m pytest --ds=task_manager.settings
+	uv run coverage run --omit='*/migrations/*,*/settings.py,*/manage.py,*/venv/*,*/.venv/*' -m pytest --ds=task_manager.settings
 	uv run coverage report --show-missing --skip-covered
 
 
@@ -47,6 +47,6 @@ ci-migrate:
 	uv run python manage.py migrate --noinput
 
 ci-test:
-	uv run coverage run --omit='*/migrations/*,*/settings.py,*/venv/*,*/.venv/*' -m pytest --ds=task_manager.settings --reuse-db
+	uv run coverage run --omit='*/migrations/*,*/settings.py,*/manage.py,*/venv/*,*/.venv/*' -m pytest --ds=task_manager.settings --reuse-db
 	uv run coverage xml
 	uv run coverage report --show-missing --skip-covered
