@@ -77,4 +77,6 @@ class TestTaskCRUD:
         response = client.post(url)
         assert Task.objects.count() == 1
         messages = list(get_messages(response.wsgi_request))
-        assert "Only the author can delete an issue." or "Задачу может удалить только ее автор" in str(messages[0])
+        error_messages = ("Only the author can delete an issue.",
+                         "Задачу может удалить только ее автор")
+        assert str(messages[0]) in error_messages

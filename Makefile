@@ -17,7 +17,7 @@ lint:
 	uv run ruff check
 
 test:
-	uv run pytest --reuse-db
+	uv run pytest -vv --reuse-db
 
 compilemessages:
 	uv run django-admin compilemessages
