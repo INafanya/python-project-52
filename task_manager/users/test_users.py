@@ -106,8 +106,8 @@ def test_get_extra_data():
 
 @pytest.mark.django_db
 def test_get_payload_data_authenticated_user():
-    User = get_user_model()
-    user = User.objects.create_user(
+    user_model = get_user_model()
+    user = user_model.objects.create_user(
         username="testuser",
         email="test@example.com",
         password="pass",  # NOSONAR
