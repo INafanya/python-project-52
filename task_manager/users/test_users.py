@@ -37,8 +37,8 @@ class TestUsers:
             "username": "newuser",
             "first_name": "First",
             "last_name": "Last",
-            "password1": "complexpass123",
-            "password2": "complexpass123",
+            "password1": "complexpass123",  # NOSONAR
+            "password2": "complexpass123",  # NOSONAR
         }
         response = client.post(url, data)
         assert response.status_code == 302
@@ -47,8 +47,9 @@ class TestUsers:
     # Test Update User
     def test_user_update(self, client):
         user_model = get_user_model()
-        user = user_model.objects.create_user(username="u1", password="pass123")
-        client.login(username="u1", password="pass123")
+        user = user_model.objects.create_user(username="u1",
+                                              password="pass123")  # NOSONAR
+        client.login(username="u1", password="pass123")  # NOSONAR
 
         url = reverse("users_update", kwargs={"pk": user.id})
         response = client.post(
@@ -57,8 +58,8 @@ class TestUsers:
                 "username": "u1_updated",
                 "first_name": "Name",
                 "last_name": "Surname",
-                "password1": "newpass12345",
-                "password2": "newpass12345",
+                "password1": "newpass12345",  # NOSONAR
+                "password2": "newpass12345",  # NOSONAR
             },
         )
         assert response.status_code == 302
@@ -68,8 +69,8 @@ class TestUsers:
     # Test Delete User
     def test_user_delete(self, client):
         user_model = get_user_model()
-        user = user_model.objects.create_user(username="u1", password="pass123")
-        client.login(username="u1", password="pass123")
+        user = user_model.objects.create_user(username="u1", password="pass123")  # NOSONAR
+        client.login(username="u1", password="pass123")  # NOSONAR
 
         url = reverse("users_delete", kwargs={"pk": user.id})
         response = client.post(url)
@@ -79,12 +80,12 @@ class TestUsers:
     # Test LogIn
     def test_login_logout(self, client):
         user_model = get_user_model()
-        user_model.objects.create_user(username="u1", password="pass123")
+        user_model.objects.create_user(username="u1", password="pass123")  # NOSONAR
 
         login_url = reverse("login")
         response = client.post(
             login_url,
-            {"username": "u1", "password": "pass123"},
+            {"username": "u1", "password": "pass123"},  # NOSONAR
         )
         assert response.status_code == 302
 
@@ -109,7 +110,7 @@ def test_get_payload_data_authenticated_user():
     user = User.objects.create_user(
         username="testuser",
         email="test@example.com",
-        password="pass",
+        password="pass",  # NOSONAR
         first_name="Test",
         last_name="User",
     )
