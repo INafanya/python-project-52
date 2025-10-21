@@ -2,10 +2,10 @@ build:
 	./build.sh
 
 install:
-	uv sync
+	uv sync --no-dev
 
 dev-install:
-	uv sync --group dev
+	uv sync
 
 migrate:
 	uv run python manage.py migrate
@@ -16,7 +16,7 @@ collectstatic:
 render-start:
 	uv run gunicorn task_manager.wsgi
 
-dev:
+run:
 	uv run manage.py runserver
 
 lint:
