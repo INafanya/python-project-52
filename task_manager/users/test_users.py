@@ -69,7 +69,8 @@ class TestUsers:
     # Test Delete User
     def test_user_delete(self, client):
         user_model = get_user_model()
-        user = user_model.objects.create_user(username="u1", password="pass123")  # NOSONAR
+        user = user_model.objects.create_user(username="u1",
+                                              password="pass123")  # NOSONAR
         client.login(username="u1", password="pass123")  # NOSONAR
 
         url = reverse("users_delete", kwargs={"pk": user.id})
@@ -80,7 +81,8 @@ class TestUsers:
     # Test LogIn
     def test_login_logout(self, client):
         user_model = get_user_model()
-        user_model.objects.create_user(username="u1", password="pass123")  # NOSONAR
+        user_model.objects.create_user(username="u1",
+                                       password="pass123")  # NOSONAR
 
         login_url = reverse("login")
         response = client.post(
